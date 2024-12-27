@@ -1,0 +1,46 @@
+name: Publish Python package
+
+on:
+  push:
+    tags:
+      - 'v1.0.0'
+
+jobs:
+  publish:
+    runs-on: fedora-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install Fedora dependencies
+      run: |
+        sudo dnf install -y \
+          gcc \
+          gcc-c++ \
+          make \
+          cmake \
+          boost-devel \
+          boost-python3-devel \
+          python3-devel \
+          openssl-devel \
+          zlib-devel \
+          bzip2-devel
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+
+    - name: Build the package
+      run: python -m build
+
+    - name: Publish to PyPI
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+      run: python -m twine upload dist/*
