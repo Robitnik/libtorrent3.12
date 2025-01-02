@@ -12,25 +12,18 @@ This repository provides Python bindings for [libtorrent](https://github.com/arv
 - Pythonic interface for ease of use in Python projects.
 - Compatible with Python 3.12 and built using Boost.Python.
 
-## Installation
-The package can be installed via `pip` from the provided wheel files or by building from source.
+## Auto building for Fedora 40, 41
 
-### Using pip with pre-built wheel:
 ```bash
-pip install libtorrent3.12
+./autoinstall.sh
 ```
 
 ### Building from source:
 To build and install the bindings from source, ensure you have the required dependencies:
 - Boost (with Boost.Python)
 - OpenSSL
-- Python 3.12 development headers
+- Python 3.11,3.12,3.13+, development headers
 
-Then, run:
-```bash
-python setup.py build
-python setup.py install
-```
 
 ## Examples
 Here’s a simple example to get started:
