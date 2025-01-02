@@ -8,7 +8,7 @@ LIBTORRENT_REPO="https://github.com/arvidn/libtorrent.git"
 LIBTORRENT_BRANCH="RC_2_0"
 INSTALL_PREFIX="$HOME/.local"
 PYTHON_VERSION="python3"  # Replace with python3.12 or python3.13 if needed
-
+SITE_PACKAGES="/usr/lib64/python3.13/site-packages/" #Replace TO your site-packages path  
 # Update and install dependencies
 echo "Installing dependencies..."
 sudo dnf install -y \
@@ -59,3 +59,6 @@ echo "Verifying installation..."
 ${PYTHON_VERSION} -c "import libtorrent; print('Libtorrent version:', libtorrent.version)"
 
 echo "Libtorrent installation completed successfully!"
+
+echo "Libtorrent added to global path"
+sudo cp bindings/python/libtorrent.cpython-313-x86_64-linux-gnu.so /usr/lib64/python3.13/site-packages/
